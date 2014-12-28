@@ -44,4 +44,9 @@
 
     <!-- Emergency button in power menu -->
     <java-symbol type="bool" name="config_showEmergencyButtonInPowerMenu" />
+
+    <!-- Screenrecord -->
+    <java-symbol type="bool" name="config_enableScreenrecordChord" />
+
+
 </resources>
