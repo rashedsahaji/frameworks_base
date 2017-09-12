@@ -330,7 +330,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/nav_bar"
                   android:process=":tuner"
-                  android:parentActivityName="com.kcuf.settings.fragments.NavbarSettings"
+                  android:parentActivityName="com.lean.settings.fragments.NavbarSettings"
                   android:exported="true">
         </activity>
 
@@ -338,7 +338,7 @@
                   android:theme="@style/ExTunerSettings"
                   android:label="@string/tuner_lock_screen"
                   android:process=":tuner"
-                  android:parentActivityName="com.kcuf.settings.fragments.LockScreenSettings"
+                  android:parentActivityName="com.lean.settings.fragments.LockScreenSettings"
                   android:exported="true">
         </activity>
 
