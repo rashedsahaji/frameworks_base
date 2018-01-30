@@ -8591,6 +8591,13 @@ public final class Settings {
          */
         public static final String NAVIGATION_BAR_VISIBLE = "navigation_bar_visible";
 
+	/**
+         * Enable face auto unlock on secure lock screens
+         *
+         * @hide
+         */
+        public static final String FACE_AUTO_UNLOCK = "face_auto_unlock";
+
         /**
          * This are the settings to be backed up.
          *
