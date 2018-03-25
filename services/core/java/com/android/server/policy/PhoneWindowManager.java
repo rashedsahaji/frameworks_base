@@ -284,7 +284,7 @@ import com.android.internal.util.ArrayUtils;
 import com.android.internal.util.hwkeys.ActionHandler;
 import com.android.internal.util.hwkeys.ActionUtils;
 import com.android.internal.util.ScreenshotHelper;
-import com.android.internal.util.aospextended.AEXUtils;
+import com.android.internal.util.lean.LeanUtils;
 import com.android.internal.util.gesture.EdgeGesturePosition;
 import com.android.internal.util.gesture.EdgeServiceConstants;
 import com.android.internal.util.ScreenShapeHelper;
