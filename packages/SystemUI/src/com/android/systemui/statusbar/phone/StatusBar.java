@@ -137,6 +137,7 @@ import com.android.internal.logging.nano.MetricsProto.MetricsEvent;
 import com.android.internal.statusbar.IStatusBarService;
 import com.android.internal.statusbar.NotificationVisibility;
 import com.android.internal.statusbar.StatusBarIcon;
+import com.android.internal.util.lean.LeanUtils;
 import com.android.internal.widget.LockPatternUtils;
 import com.android.internal.widget.MessagingGroup;
 import com.android.internal.widget.MessagingMessage;
@@ -792,6 +793,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         Dependency.get(ActivityStarterDelegate.class).setActivityStarterImpl(this);
 
         Dependency.get(ConfigurationController.class).addCallback(this);
+
     }
 
     // ================================================================================
@@ -3180,6 +3182,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateNotificationViews();
         mMediaManager.clearCurrentMediaNotification();
         setLockscreenUser(newUserId);
+        mSbSettingsObserver.update();
     }
 
     @Override
@@ -4585,6 +4588,8 @@ public class StatusBar extends SystemUI implements DemoMode,
         }
     };
 
+ private boolean mShowNavBar;
+
     private SSettingsObserver mSSettingsObserver = new SSettingsObserver(mHandler);
     private class SSettingsObserver extends ContentObserver {
         SSettingsObserver(Handler handler) {
@@ -4610,6 +4615,9 @@ public class StatusBar extends SystemUI implements DemoMode,
             resolver.registerContentObserver(Settings.System.getUriFor(
                     Settings.System.QS_COLUMNS_LANDSCAPE),
                     false, this, UserHandle.USER_ALL);
+            resolver.registerContentObserver(Settings.System.getUriFor(
+                    Settings.System.NAVIGATION_BAR_SHOW),
+                    false, this, UserHandle.USER_ALL);
         }
 
         @Override
@@ -4626,6 +4634,7 @@ public class StatusBar extends SystemUI implements DemoMode,
          public void update() {
             setLockscreenDoubleTapToSleep();
             setQsRowsColumns();
+            updateNavigationBar();
         }
     }
 
@@ -4648,6 +4657,32 @@ public class StatusBar extends SystemUI implements DemoMode,
         // Make sure to pass -1 for repeat so VibratorService doesn't stop us when going to sleep.
         mVibrator.vibrate(mCameraLaunchGestureVibePattern, -1 /* repeat */);
     }
+
+    private void updateNavigationBar() {
+        int showNavBar = Settings.System.getIntForUser(
+                mContext.getContentResolver(), Settings.System.NAVIGATION_BAR_SHOW,
+                 -1, UserHandle.USER_CURRENT);
+        if (showNavBar != -1){
+            boolean showNavBarBool = showNavBar == 1;
+            if (showNavBarBool !=  mShowNavBar){
+                   mShowNavBar = LeanUtils.deviceSupportNavigationBar(mContext);
+                  if (DEBUG) Log.v(TAG, "updateNavigationBar=" + mShowNavBar);
+                   if (mShowNavBar) {
+                     if (mNavigationBarView == null) {
+                        createNavigationBar();
+                        }
+                  } else {
+                      if (mNavigationBarView != null){
+                         FragmentHostManager fm = FragmentHostManager.get(mNavigationBarView);
+                         mWindowManager.removeViewImmediate(mNavigationBarView);
+                         mNavigationBarView = null;
+                         fm.getFragmentManager().beginTransaction().remove(mNavigationBar).commit();
+                         mNavigationBar = null;
+                      }
+                  }
+           }
+        }
+     }
 
     /**
      * @return true if the screen is currently fully off, i.e. has finished turning off and has
@@ -5137,7 +5172,6 @@ public class StatusBar extends SystemUI implements DemoMode,
     public boolean isDeviceInVrMode() {
         return mVrMode;
     }
-
 
     private final BroadcastReceiver mBannerActionBroadcastReceiver = new BroadcastReceiver() {
         @Override
@@ -5716,4 +5750,5 @@ public class StatusBar extends SystemUI implements DemoMode,
                     saveImportance.run();
                 }
             };
+
 }
