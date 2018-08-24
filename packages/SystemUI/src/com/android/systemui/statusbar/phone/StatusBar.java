@@ -3182,7 +3182,7 @@ public class StatusBar extends SystemUI implements DemoMode,
         updateNotificationViews();
         mMediaManager.clearCurrentMediaNotification();
         setLockscreenUser(newUserId);
-        mSbSettingsObserver.update();
+        mSSettingsObserver.update();
     }
 
     @Override
