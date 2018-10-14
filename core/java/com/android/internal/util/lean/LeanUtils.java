@@ -51,6 +51,8 @@ import android.os.UserHandle;
 import java.util.List;
 
 import com.android.internal.statusbar.IStatusBarService;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager.NameNotFoundException;
 
 /**
  * Some custom utilities
@@ -85,6 +87,24 @@ public class LeanUtils {
             wifi = cm.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
         }
         return activeNetwork != null && activeNetwork.isConnectedOrConnecting() && wifi.isConnected();
+  }
+
+    public static boolean isPackageInstalled(Context context, String pkg, boolean ignoreState) {
+        if (pkg != null) {
+            try {
+                PackageInfo pi = context.getPackageManager().getPackageInfo(pkg, 0);
+                if (!pi.applicationInfo.enabled && !ignoreState) {
+                    return false;
+                }
+            } catch (NameNotFoundException e) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean isPackageInstalled(Context context, String pkg) {
+        return isPackageInstalled(context, pkg, true);
     }
 
     // Check to see if Mobile data is connected
