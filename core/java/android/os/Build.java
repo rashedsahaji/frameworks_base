@@ -933,10 +933,6 @@ public class Build {
     /** A string that uniquely identifies this build.  Do not attempt to parse this value. */
     public static final String FINGERPRINT = deriveFingerprint();
 
-    /* @hide */
-    public static final String CUSTOM_FINGERPRINT = SystemProperties.get("org.pixelexperience.fingerprint",
-            deriveFingerprint());
-
     /**
      * @hide
      */
