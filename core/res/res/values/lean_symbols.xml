@@ -69,4 +69,9 @@
     <java-symbol type="integer" name="config_deviceHardwareKeys" />
 
   <java-symbol type="array" name="config_vendorPlatformSignatures" />
+
+    <!-- Ambient play -->
+    <java-symbol type="string" name="ambient_recognition_notification" />
+    <java-symbol type="string" name="ambient_recognition_information" />
+
 </resources>
