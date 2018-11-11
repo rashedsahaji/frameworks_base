@@ -4602,6 +4602,11 @@ public final class Settings {
         public static final String USE_EDGE_SERVICE_FOR_GESTURES = "edge_service_for_gestures";
 
         /**
+         * @hide
+         */
+        public static final String QS_HEADER_STYLE = "qs_header_style";
+
+        /**
          * Settings to backup. This is here so that it's in the same place as the settings
          * keys and easy to update.
          *
@@ -4805,6 +4810,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(STATUSBAR_CLOCK_DATE_FORMAT);
             PRIVATE_SETTINGS.add(ACCELEROMETER_ROTATION_ANGLES);
             PRIVATE_SETTINGS.add(WEATHER_LOCKSCREEN_UNIT);
+            PRIVATE_SETTINGS.add(QS_HEADER_STYLE);
         }
 
 
