@@ -6434,7 +6434,7 @@ message MetricsEvent {
     // Add new aosp constants above this line.
     // END OF AOSP CONSTANTS
 // Lean constant
-    LEAN = 1500;
+    LEAN = 2000;
 
   }
 }

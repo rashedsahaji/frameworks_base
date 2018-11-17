@@ -126,15 +126,6 @@ public class ScreenDecorations extends SystemUI implements Tunable {
             setupDecorations();
         }
 
-        int padding = mContext.getResources().getDimensionPixelSize(
-                R.dimen.rounded_corner_content_padding);
-        int padding_alt = mContext.getResources().getDimensionPixelSize(
-                R.dimen.rounded_corner_content_padding_alt);
-        if (padding != 0 && Build.PRODUCT.equals("taimen")) {
-            setupPadding(padding);
-        } else {
-            setupPadding(padding_alt);
-        }
 
         mDisplayListener = new DisplayManager.DisplayListener() {
             @Override

@@ -1173,9 +1173,6 @@ public class StatusBar extends SystemUI implements DemoMode,
 
         mFlashlightController = Dependency.get(FlashlightController.class);
 
-        // listen for NAVIGATION_BAR_ENABLED setting (per-user)
-        resetNavBarObserver();
-
     }
 
     private AmbientIndicationManagerCallback mAmbientCallback = new AmbientIndicationManagerCallback() {
