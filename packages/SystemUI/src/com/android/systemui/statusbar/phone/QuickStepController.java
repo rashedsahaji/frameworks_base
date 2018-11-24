@@ -52,7 +52,7 @@ import android.view.WindowManagerGlobal;
 import android.view.animation.DecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.support.annotation.DimenRes;
-import com.android.internal.util.arrow.ArrowUtils;
+import com.android.internal.util.lean.LeanUtils;
 import com.android.systemui.Dependency;
 import com.android.systemui.OverviewProxyService;
 import com.android.systemui.R;
@@ -244,7 +244,7 @@ public class QuickStepController implements GestureHelper {
                     isDoubleTapPending = false;
                     wasConsumed = true;
                     mHandler.removeCallbacks(mDoubleTapCancelTimeout);
-                    ArrowUtils.switchScreenOff(mContext);
+                    LeanUtils.switchScreenOff(mContext);
                 } else {
                     // this is the first tap, let's go further and schedule a
                     // mDoubleTapCancelTimeout call in the action up event so after the set time
@@ -361,7 +361,7 @@ public class QuickStepController implements GestureHelper {
                }
 
                 if (mBackActionScheduled) {
-                    ArrowUtils.sendKeycode(KeyEvent.KEYCODE_BACK);
+                    LeanUtils.sendKeycode(KeyEvent.KEYCODE_BACK);
                 } else {
                     endQuickScrub(true /* animate */);
                 }
@@ -384,7 +384,7 @@ public class QuickStepController implements GestureHelper {
             wasConsumed = false;
             isDoubleTapPending = false;
             // it was a single tap, let's trigger the home button action
-            ArrowUtils.sendKeycode(KeyEvent.KEYCODE_HOME);
+            LeanUtils.sendKeycode(KeyEvent.KEYCODE_HOME);
         }
     };
 
