@@ -39,10 +39,8 @@ import android.graphics.PixelFormat;
 import android.graphics.Rect;
 import android.graphics.Region;
 import android.hardware.display.DisplayManager;
-import android.os.Build;
 import android.os.Handler;
 import android.os.HandlerThread;
-import android.os.Build;
 import android.os.SystemProperties;
 import android.provider.Settings.Secure;
 import android.support.annotation.VisibleForTesting;
@@ -371,14 +369,8 @@ public class ScreenDecorations extends SystemUI implements Tunable {
         // screen decorations overlay.
         int padding = mContext.getResources().getDimensionPixelSize(
                 R.dimen.rounded_corner_content_padding);
-        int padding_alt = mContext.getResources().getDimensionPixelSize(
-                R.dimen.rounded_corner_content_padding_alt);
-        int qsPadding = mContext.getResources().getDimensionPixelSize(
-                R.dimen.qs_corner_content_padding);
-	if (padding != 0 && Build.PRODUCT.equals("taimen")) {
-            setupStatusBarPadding(padding, qsPadding);
-        } else {
-            setupStatusBarPadding(padding_alt, qsPadding);
+        if (padding != 0) {
+            setupStatusBarPadding(padding);
         }
 
     }
